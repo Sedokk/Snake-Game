@@ -32,14 +32,14 @@ export default function gameStart() {
     snake.x += config.dx
     snake.y += config.dy
 
+    borderLoop()
+
     //Змейка съедает ягодку
     if (snake.x === berry.x && snake.y === berry.y) {
       ++snake.maxTails
       ++count
       defineBerry()
     }
-
-    borderLoop()
 
     snake.tails.unshift({ x: snake.x, y: snake.y })
     if (snake.tails.length > snake.maxTails) snake.tails.pop()
