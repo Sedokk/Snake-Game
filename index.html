@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Snake Game</title>
+  </head>
+  <body>
+    <div class="canvas__container">
+      <div class="data-panel">
+        <p class="mode data">Classic</p>
+        <p class="count data">Points: <span id="count">0</span></p>
+        <p class="count-record data">
+          Record: <span id="record-count">0</span>
+        </p>
+      </div>
+      <div class="canvas__wrapper">
+        <canvas width="600" height="600" id="canvas"></canvas>
+      </div>
+      <div class="canvas__blur">
+        <button class="canvas__btn">Play</button>
+      </div>
+    </div>
+    <script src="game.js" type="module"></script>
+    <script src="main.js" type="module"></script>
+  </body>
+</html>

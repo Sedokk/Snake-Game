@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre&family=Source+Code+Pro:wght@400;600&display=swap");
+
+:root {
+  --basic-font: "Gemunu Libre", sans-serif;
+  --code-font: "Source Code Pro", monospace;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  background-color: lightblue;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#canvas {
+  background-color: white;
+  padding: 0;
+}
+
+.canvas__container {
+  position: relative;
+  top: 10px;
+  /* height: 600px; */
+  border-radius: 5px;
+  overflow: hidden;
+}
+.canvas__blur {
+  position: absolute;
+  width: 100%;
+  height: 600px;
+  background-color: rgba(57, 255, 113, 0.6);
+  left: 0;
+  bottom: 0;
+  display: grid;
+}
+.canvas__btn {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 40px;
+  background-color: rgb(35, 163, 0);
+  color: white;
+  place-self: center;
+  font-family: var(--basic-font);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.canvas__btn:hover {
+  transform: scale(1.03);
+  background-color: rgb(81, 185, 52);
+}
+.canvas__wrapper {
+  height: 600px;
+}
+.data-panel {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+}
+.data {
+  font-family: var(--code-font);
+  font-size: 20px;
+  line-height: 0;
+  font-weight: 600;
+}
+.hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
