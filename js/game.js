@@ -1,5 +1,5 @@
 //Начало игры
-export default function gameStart() {
+export default function gameStart({ speed, size, goldenBerry, border }) {
   //Переменные
   const canvas = document.querySelector("#canvas")
   const context = canvas.getContext("2d")
@@ -20,12 +20,13 @@ export default function gameStart() {
     x: 120,
     y: 120,
     tails: [],
-    maxTails: 3,
+    maxTails: size,
   }
   const berry = {
     x: 0,
     y: 0,
   }
+
   //Обновление змейки (её движение в интервале)
   function game() {
     clear()
@@ -41,6 +42,7 @@ export default function gameStart() {
       defineBerry()
     }
 
+    //Удаление и добавление частей змейки, чтобы она двигалась
     snake.tails.unshift({ x: snake.x, y: snake.y })
     if (snake.tails.length > snake.maxTails) snake.tails.pop()
 
@@ -93,6 +95,10 @@ export default function gameStart() {
   function defineBerry() {
     berry.x = getRandomNum(0, canvas.width / config.cellSize) * config.cellSize
     berry.y = getRandomNum(0, canvas.height / config.cellSize) * config.cellSize
+
+    snake.tails.forEach((e) => {
+      e.x === berry.x && e.y === berry.y && defineBerry()
+    })
   }
 
   //Очищение поля (канваса)
@@ -148,5 +154,5 @@ export default function gameStart() {
 
   //Вызов координат ягодки и установка интервала ререндеринга
   defineBerry()
-  timer = window.setInterval(game, 50)
+  timer = window.setInterval(game, 500 / speed)
 }

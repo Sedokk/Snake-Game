@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="nouislider/nouislider.css" />
     <title>Snake Game</title>
   </head>
   <body>
     <div class="canvas__container">
       <div class="data-panel">
+        <button class="modal__open">Settings</button>
         <p class="mode data">Classic</p>
         <p class="count data">Points: <span id="count">0</span></p>
         <p class="count-record data">
@@ -17,13 +19,70 @@
         </p>
       </div>
       <div class="canvas__wrapper">
-        <canvas width="600" height="600" id="canvas"></canvas>
+        <canvas width="1000" height="800" id="canvas"></canvas>
       </div>
       <div class="canvas__blur">
         <button class="canvas__btn">Play</button>
       </div>
     </div>
-    <script src="game.js" type="module"></script>
-    <script src="main.js" type="module"></script>
+    <div class="modal">
+      <div class="modal__body">
+        <button class="modal__close">
+          <svg
+            viewBox="0 0 32 32"
+            xmlns="http://www.w3.org/2000/svg"
+            class="modal__svg"
+          >
+            <title />
+            <g id="cross">
+              <line class="cls-1" x1="7" x2="25" y1="7" y2="25" />
+              <line class="cls-1" x1="7" x2="25" y1="25" y2="7" />
+            </g>
+          </svg>
+        </button>
+        <form class="modal__form">
+          <div class="form__speed form__block">
+            <h2 class="form__title">Speed</h2>
+            <span class="form__result result__speed">10</span>
+            <div id="slider1" class="slider"></div>
+          </div>
+          <div class="form__size form__block">
+            <h2 class="form__title">Start size</h2>
+            <span class="form__result result__size">10</span>
+            <div id="slider2" class="slider"></div>
+          </div>
+          <div class="form__border form__block">
+            <h2 class="form__title">Border</h2>
+            <div class="form__radio-wrapper">
+              <label class="form__radio-label form__radio-label-border">
+                <span class="form__radio-span">ON</span>
+                <input type="radio" name="border" value="#" />
+              </label>
+              <label class="form__radio-label form__radio-label-border checked">
+                <span class="form__radio-span">OFF</span>
+                <input type="radio" name="border" value="" checked />
+              </label>
+            </div>
+          </div>
+          <div class="form__golden form__block">
+            <h2 class="form__title">Golden berry</h2>
+            <div class="form__radio-wrapper">
+              <label class="form__radio-label form__radio-label-golden">
+                <span class="form__radio-span">ON</span>
+                <input type="radio" name="golden" value="#" />
+              </label>
+              <label class="form__radio-label form__radio-label-border checked">
+                <span class="form__radio-span">OFF</span>
+                <input type="radio" name="golden" value="" checked />
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="form__submit">Confirm</button>
+        </form>
+      </div>
+    </div>
+    <script src="nouislider/nouislider.min.js" type="module"></script>
+    <script src="js/game.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
   </body>
 </html>
