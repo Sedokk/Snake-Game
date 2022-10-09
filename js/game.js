@@ -33,7 +33,16 @@ export default function gameStart({ speed, size, goldenBerry, border }) {
     snake.x += config.dx
     snake.y += config.dy
 
-    borderLoop()
+    // Поведение змейки у границы
+    borderBehavior(border)
+
+    // Змейка врезается в себя
+    snake.tails.forEach((e, index) => {
+      if (index !== 0 && e.x === snake.x && e.y === snake.y) {
+        loose()
+        return
+      }
+    })
 
     //Змейка съедает ягодку
     if (snake.x === berry.x && snake.y === berry.y) {
@@ -54,9 +63,6 @@ export default function gameStart({ speed, size, goldenBerry, border }) {
   //Отрисовка змейки
   function drawSnake() {
     snake.tails.forEach((e, index) => {
-      if (e.x === snake.x && e.y === snake.y && index !== 0) {
-        loose()
-      }
       if (index === 0) context.fillStyle = "green"
       else context.fillStyle = "lightgreen"
       context.fillRect(e.x, e.y, config.cellSize, config.cellSize)
@@ -78,16 +84,24 @@ export default function gameStart({ speed, size, goldenBerry, border }) {
   }
 
   //Телепортация змейки при пересечении границы поля
-  function borderLoop() {
-    if (snake.x < 0) {
-      snake.x = canvas.width - config.cellSize
-    } else if (snake.x >= canvas.width) {
-      snake.x = 0
-    }
-    if (snake.y < 0) {
-      snake.y = canvas.height - config.cellSize
-    } else if (snake.y >= canvas.height) {
-      snake.y = 0
+  function borderBehavior(border) {
+    if (border) {
+      ;(snake.x < 0 ||
+        snake.x >= canvas.width ||
+        snake.y < 0 ||
+        snake.y >= canvas.height) &&
+        loose()
+    } else {
+      if (snake.x < 0) {
+        snake.x = canvas.width - config.cellSize
+      } else if (snake.x >= canvas.width) {
+        snake.x = 0
+      }
+      if (snake.y < 0) {
+        snake.y = canvas.height - config.cellSize
+      } else if (snake.y >= canvas.height) {
+        snake.y = 0
+      }
     }
   }
 

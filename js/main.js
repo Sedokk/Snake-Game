@@ -1,10 +1,14 @@
 import gameStart from "./game.js"
 
-let config = {
-  speed: 10,
-  size: 3,
-  border: false,
-  goldenBerry: false,
+let config = JSON.parse(localStorage.getItem("config"))
+
+if (!config) {
+  config = {
+    speed: 10,
+    size: 3,
+    border: false,
+    goldenBerry: false,
+  }
 }
 
 // Game start =================================
@@ -26,17 +30,22 @@ startBtn.addEventListener("click", () => {
 // Modal ==================================
 modalOpenBtn.addEventListener("click", () => {
   modal.classList.add("open")
-  window.addEventListener("click", modalClose)
+  window.addEventListener("click", modalOutsideClick)
 })
 modalCloseBtn.addEventListener("click", () => {
-  modal.classList.remove("open")
+  closeModal()
 })
 
-function modalClose(ev) {
+function modalOutsideClick(ev) {
   ev.stopPropagation()
   if (!ev.target.classList.contains("modal")) return
-  ev.target.classList.remove("open")
+  closeModal()
   window.removeEventListener("click", modalClose)
+}
+
+function closeModal() {
+  modal.classList.remove("open")
+  setForm()
 }
 
 //Sliders in modal =========================
@@ -107,5 +116,48 @@ function createConfig(ev) {
     border,
   }
   modal.classList.remove("open")
-  console.log(config)
+  localStorage.setItem("config", JSON.stringify(config))
 }
+
+// Set form
+
+function setForm() {
+  speedSlider.noUiSlider.set(config.speed)
+  sizeSlider.noUiSlider.set(config.size)
+  if (config.border) {
+    form.border.forEach((e, ind) => {
+      e.closest("label").classList.remove("checked")
+      if (ind === 0) {
+        e.checked = true
+        e.closest("label").classList.add("checked")
+      }
+    })
+  } else {
+    form.border.forEach((e, ind) => {
+      e.closest("label").classList.remove("checked")
+      if (ind === 1) {
+        e.checked = true
+        e.closest("label").classList.add("checked")
+      }
+    })
+  }
+  if (config.goldenBerry) {
+    form.golden.forEach((e, ind) => {
+      e.closest("label").classList.remove("checked")
+      if (ind === 0) {
+        e.checked = true
+        e.closest("label").classList.add("checked")
+      }
+    })
+  } else {
+    form.golden.forEach((e, ind) => {
+      e.closest("label").classList.remove("checked")
+      if (ind === 1) {
+        e.checked = true
+        e.closest("label").classList.add("checked")
+      }
+    })
+  }
+}
+
+setForm()
