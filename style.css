@@ -4,7 +4,7 @@
   --basic-font: "Gemunu Libre", sans-serif;
   --code-font: "Source Code Pro", monospace;
   --canvas-height: 600px;
-  --canvas-width: 600px;
+  --canvas-width: 700px;
 }
 
 body {
@@ -226,7 +226,7 @@ body {
   cursor: pointer;
 }
 
-@media (max-height: 610px), (max-width: 610px) {
+@media (max-height: 610px), (max-width: 710px) {
   .canvas__container {
     display: none;
   }
