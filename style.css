@@ -3,8 +3,8 @@
 :root {
   --basic-font: "Gemunu Libre", sans-serif;
   --code-font: "Source Code Pro", monospace;
-  --canvas-height: 800px;
-  --canvas-width: 1000px;
+  --canvas-height: 600px;
+  --canvas-width: 600px;
 }
 
 body {
@@ -19,8 +19,8 @@ body {
 #canvas {
   background-color: white;
   padding: 0;
-  width: var(--canvas-width);
-  height: var(--canvas-height);
+  /* width: var(--canvas-width);
+  height: var(--canvas-height); */
 }
 
 .canvas__container {
@@ -112,7 +112,7 @@ body {
   position: relative;
   place-self: center;
   background-color: white;
-  width: 800px;
+  width: calc(var(--canvas-width) - 100px);
   min-height: 150px;
   padding: 30px;
   opacity: 0;
@@ -226,21 +226,7 @@ body {
   cursor: pointer;
 }
 
-@media (max-height: 900px), (max-width: 1010px) {
-  :root {
-    --canvas-height: 700px;
-    --canvas-width: 800px;
-  }
-}
-
-@media (max-height: 800px), (max-width: 810px) {
-  :root {
-    --canvas-height: 600px;
-    --canvas-width: 600px;
-  }
-}
-
-@media (max-height: 700px), (max-width: 610px) {
+@media (max-height: 610px), (max-width: 610px) {
   .canvas__container {
     display: none;
   }
