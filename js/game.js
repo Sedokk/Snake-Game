@@ -10,6 +10,7 @@ export default function gameStart({ speed, size, goldenBerry, border }) {
 
   let timer
   let count = 0
+  let goldenCount = 0
 
   const config = {
     cellSize: 20,
@@ -45,17 +46,35 @@ export default function gameStart({ speed, size, goldenBerry, border }) {
     })
 
     //Змейка съедает ягодку
-    if (snake.x === berry.x && snake.y === berry.y) {
+    if (goldenCount === 10 && goldenIsEaten()) {
+      // Золотая ягодка
+      snake.maxTails += 4
+      count += 4
+      goldenCount = 0
+      defineBerry()
+    } else if (snake.x === berry.x && snake.y === berry.y) {
+      // Обычная ягодка
       ++snake.maxTails
       ++count
-      defineBerry()
+      if (goldenBerry) ++goldenCount
+      if (goldenCount === 10) defineGoldenBerry()
+      else defineBerry()
+    }
+
+    function goldenIsEaten() {
+      //======== Определяем, съедена ли золотая ягодка
+      return (
+        (snake.x === berry.x || snake.x === berry.x + config.cellSize) &&
+        (snake.y === berry.y || snake.y === berry.y + config.cellSize)
+      )
     }
 
     //Удаление и добавление частей змейки, чтобы она двигалась
     snake.tails.unshift({ x: snake.x, y: snake.y })
     if (snake.tails.length > snake.maxTails) snake.tails.pop()
 
-    drawBerry()
+    goldenCount === 10 ? drawGoldenBerry() : drawBerry()
+
     drawSnake()
     countRender()
   }
@@ -81,6 +100,12 @@ export default function gameStart({ speed, size, goldenBerry, border }) {
     )
     context.stroke()
     context.fill()
+  }
+
+  //Отрисовка золотой ягодки
+  function drawGoldenBerry() {
+    context.fillStyle = "#ffd700"
+    context.fillRect(berry.x, berry.y, config.cellSize * 2, config.cellSize * 2)
   }
 
   //Телепортация змейки при пересечении границы поля
@@ -112,6 +137,21 @@ export default function gameStart({ speed, size, goldenBerry, border }) {
 
     snake.tails.forEach((e) => {
       e.x === berry.x && e.y === berry.y && defineBerry()
+    })
+  }
+
+  // Определение координат золотой ягодки
+
+  function defineGoldenBerry() {
+    berry.x =
+      getRandomNum(0, canvas.width / config.cellSize - 1) * config.cellSize
+    berry.y =
+      getRandomNum(0, canvas.height / config.cellSize - 1) * config.cellSize
+
+    snake.tails.forEach((e) => {
+      ;(e.x === berry.x || e.x === berry.x + config.cellSize) &&
+        (e.y === berry.y || e.y === berry.y + config.cellSize) &&
+        defineBerry()
     })
   }
 

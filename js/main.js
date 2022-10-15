@@ -100,7 +100,6 @@ form.golden.forEach((e) => {
 })
 
 // Config ========================
-
 form.addEventListener("submit", createConfig)
 
 function createConfig(ev) {
@@ -120,7 +119,6 @@ function createConfig(ev) {
 }
 
 // Set form
-
 function setForm() {
   speedSlider.noUiSlider.set(config.speed)
   sizeSlider.noUiSlider.set(config.size)
@@ -161,3 +159,22 @@ function setForm() {
 }
 
 setForm()
+
+// const obj = {
+//   name: "Gleb",
+//   action: "FUUUUCK",
+// }
+
+// function fetchData() {
+//   fetch("//192.168.0.11", {
+//     method: "POST",
+//     body: JSON.stringify(obj),
+//     headers: {
+//       "Content-type": "application/json; charset=UTF-8",
+//     },
+//   })
+//     .then((json) => json.json())
+//     .then((resp) => console.log(resp))
+// }
+
+// fetchData()
